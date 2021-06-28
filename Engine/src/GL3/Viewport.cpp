@@ -8,35 +8,36 @@ using namespace EternalEngine;
 
 Viewport::Viewport()
 {
-    width = 0;
-    height = 0;
+    _width = 0;
+    _height = 0;
 }
 
 Viewport::~Viewport()
 {
-
 }
 
-#ifdef USE_GLEW
-int init_glew()
+void Viewport::resize_viewport(int new_width, int new_height)
 {
-    if (glewInit() != GLEW_OK)
-    {
-        printf("An error occurred while initializing glew !\n");
-        return 0;
-    }
-    return 1;
+    _width = new_width;
+    _height = new_height;
+    glViewport(0, 0, _width, _height);
 }
-#endif
 
 int Viewport::create_viewport(int width, int height)
 {
-    this->width = width;
-    this->height = height;
-    #ifdef USE_GLEW
-    return init_glew();
-    #endif
+#ifdef USE_GLEW
+    if (glewInit() != GLEW_OK)
+    {
+        printf("An error occurred while initializing glew !\n");
+    }
+#endif
     glEnable(GL_DEPTH_TEST);
-    glViewport(0,0,width,height);
+    resize_viewport(width, height);
     return 1;
+}
+
+void Viewport::clear_viewport()
+{
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }

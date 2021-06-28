@@ -8,10 +8,7 @@
             "type": "shell",
             "command": "C:\\msys64\\usr\\bin\\bash.exe ${workspaceFolder}/build-mingw.sh",
             "problemMatcher": [],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
+            "group": "build"
         }
     ]
 }

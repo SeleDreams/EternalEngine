@@ -16,7 +16,9 @@ if (USE_GL3)
     set(SRC ${SRC} GL3/MeshRenderer.cpp GL3/Viewport.cpp)
 endif()
 
-
+if (USE_GLFW)
+    set(SRC ${SRC} Platforms/WindowGLFW.cpp)
+endif()
 add_library(EternalEngineSRC OBJECT ${SRC})
 
 target_compile_features(EternalEngineSRC PRIVATE cxx_std_17)

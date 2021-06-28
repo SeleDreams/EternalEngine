@@ -1,5 +1,11 @@
 #include <Game.hpp>
 #include <assert.h>
+#include <Rendering/Viewport/Viewport.hpp>
+
+#ifdef USE_GLFW
+#include <Platforms/WindowGLFW.hpp>
+#define WINDOW_CLASS WindowGLFW
+#endif
 
 using namespace EternalEngine;
 
@@ -9,6 +15,8 @@ Game::Game()
 {
     assert(!Game::instance());
     Game::_singleton = this;
+    _is_running = false;
+    _window = std::shared_ptr<Window>(nullptr);
 }
 
 Game::~Game()
@@ -16,13 +24,24 @@ Game::~Game()
     Game::_singleton = nullptr;
 }
 
-bool Game::run(unsigned int width, unsigned int height,std::function<bool()> buffer_swap_callback)
+int Game::init(unsigned int width, unsigned int height, const char *name)
 {
-    _viewport.create_viewport(width, height);
-    _is_running = true;
-    while (_is_running && buffer_swap_callback())
+    _window = std::shared_ptr<Window>(dynamic_cast<Window *>(new WINDOW_CLASS()));
+    if (!_window)
     {
-        glClearColor(0.0f,0.0f,0.0f,1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        return 0;
+    }
+    return _window->create_window(width, height, name);
+}
+
+void Game::run()
+{
+    _is_running = true;
+    while (_is_running)
+    {
+        _window->viewport().clear_viewport();
+        _window->poll_events();
+        _window->swap_buffer();
+        _is_running = !_window->should_close();
     }
 }
