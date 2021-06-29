@@ -1,7 +1,7 @@
 
 #include <stdio.h>
 #include <Game.hpp>
-
+#include <Rendering/Window/Window.hpp>
 int main(int argc, char **argv)
 {
     EternalEngine::Game game;
@@ -9,6 +9,10 @@ int main(int argc, char **argv)
     {
         printf("An error occurred while initializing the game !");
     }
-    game.get_window()->resize_window(1280,720);
+    EternalEngine::Window *main_window = dynamic_cast<EternalEngine::Window*>(game.render_surface().get());
+    if (main_window)
+    {
+        main_window->resize_window(1280,720);
+    }
     game.run();
 }

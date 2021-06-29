@@ -1,5 +1,0 @@
-cmake_minimum_required(VERSION 3.13)
-project(EternalEngine)
-add_subdirectory(src)
-add_library(EternalEngine OBJECT dummy.cpp)
-target_link_libraries(EternalEngine EternalEngineSRC)

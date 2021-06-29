@@ -12,7 +12,7 @@ namespace EternalEngine
         ~WindowGLFW();
 
         virtual Viewport &viewport() { return _viewport; }
-        virtual int create_window(unsigned int window_width, unsigned int window_height, const std::string &window_name);
+        virtual int create(unsigned int window_width, unsigned int window_height, const std::string &window_name);
         virtual const char *name() const;
         virtual void close() { glfwSetWindowShouldClose(_window, 1); }
         virtual void set_name(const std::string &new_name);

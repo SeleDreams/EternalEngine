@@ -1,6 +1,7 @@
 #pragma once
 #include <memory>
 #include <functional>
+#include <Scene.hpp>
 #include <Rendering/Renderer.hpp>
 #include <Rendering/Window/Window.hpp>
 
@@ -14,11 +15,12 @@ namespace EternalEngine
         ~Game();
         int init(unsigned int width = 800, unsigned int height = 600, const char *name = "Eternal Engine");
         void run();
-        void exit() { _window->close(); }
-        std::shared_ptr<Window> get_window() { return _window; }
+        void exit() { _render_surface->close(); }
+        std::shared_ptr<RenderSurface> render_surface() { return _render_surface; }
 
     private:
-        std::shared_ptr<Window> _window;
+        std::shared_ptr<Scene> _scene;
+        std::shared_ptr<RenderSurface> _render_surface;
         bool _is_running;
         static Game *_singleton;
     };

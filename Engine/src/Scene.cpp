@@ -11,3 +11,8 @@ Scene::~Scene()
 {
     
 }
+
+void Scene::update(float delta)
+{
+    printf("FPS : %.8f\n",(1.0f / delta));
+}

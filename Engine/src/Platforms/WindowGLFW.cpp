@@ -50,7 +50,7 @@ void WindowGLFW::set_name(const std::string &new_name)
     glfwSetWindowTitle(_window,_name.c_str());
 }
 
-int WindowGLFW::create_window(unsigned int window_width, unsigned int window_height, const std::string &window_name)
+int WindowGLFW::create(unsigned int window_width, unsigned int window_height, const std::string &window_name)
 {
     if (!glfwInit())
     {
