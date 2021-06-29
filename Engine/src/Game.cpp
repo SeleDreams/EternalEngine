@@ -18,6 +18,7 @@ Game::Game()
     Game::_singleton = this;
     _is_running = false;
     _render_surface = std::shared_ptr<Window>(nullptr);
+    _scene = std::shared_ptr<Scene>(nullptr);
 }
 
 Game::~Game()
@@ -32,6 +33,7 @@ int Game::init(unsigned int width, unsigned int height, const char *name)
     {
         return 0;
     }
+    _scene = std::shared_ptr<Scene>(new Scene());
     return _render_surface->create(width, height, name);
 }
 

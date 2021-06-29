@@ -17,7 +17,7 @@ namespace EternalEngine
         void run();
         void exit() { _render_surface->close(); }
         std::shared_ptr<RenderSurface> render_surface() { return _render_surface; }
-
+        std::shared_ptr<Scene> main_scene() { return _scene; }
     private:
         std::shared_ptr<Scene> _scene;
         std::shared_ptr<RenderSurface> _render_surface;

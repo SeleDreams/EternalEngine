@@ -5,9 +5,10 @@ set (CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
 set(SRC
-"Scene.cpp"
 "Game.cpp"
-"SystemManager.cpp"
+"SceneManagement/Scene.cpp"
+"Systems/SystemManager.cpp"
+"Components/ComponentFactory.cpp"
 )
 
 if(WIN32 OR UNIX)

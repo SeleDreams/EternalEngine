@@ -10,18 +10,13 @@ namespace EternalEngine
     class SystemManager
     {
     public:
-        static SystemManager &get_singleton()
-        {
-            static SystemManager singleton;
-            return singleton;
-        }
-        SystemManager();
-        ~SystemManager();
-        bool add_system(const char *name, std::function<std::shared_ptr<ISystem>()> func);
+        SystemManager() = default;
+        ~SystemManager() = default;
+        unsigned int add_system(std::shared_ptr<ISystem> system);
         void update_systems(float delta);
 
     private:
-        std::vector<ISystem*> _systems; 
-        std::map<const char*, std::function<std::shared_ptr<ISystem>()>> _systems_map;
+        std::vector<std::shared_ptr<ISystem>> _systems; 
+        //std::map<const char*, std::function<std::shared_ptr<ISystem>()>> _systems_map;
     };
 };
