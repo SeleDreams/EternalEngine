@@ -1,5 +1,5 @@
 #include <SceneManagement/Scene.hpp>
-
+#include <Backend/OpenGL/GLUtils.hpp>
 using namespace EternalEngine;
 
 Scene::Scene()
@@ -9,7 +9,8 @@ Scene::Scene()
 
 Scene::~Scene()
 {
-    
+    _system_manager.clear();
+    _entity_registry.clear();
 }
 
 void Scene::update(float delta)

@@ -2,5 +2,5 @@
 . ~/.bashrc
 mkdir -p build
 cd build
-mingw32-make
+mingw32-make -j
 cd ..

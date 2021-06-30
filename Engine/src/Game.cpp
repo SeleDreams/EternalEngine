@@ -5,7 +5,8 @@
 #include <Systems/RenderSystem.hpp>
 
 #ifdef USE_GLFW
-#include <Platforms/WindowGLFW.hpp>
+#include <Backend/GLFW/WindowGLFW.hpp>
+#include <Backend/OpenGL/GLUtils.hpp>
 #define WINDOW_CLASS WindowGLFW
 #endif
 
@@ -45,15 +46,16 @@ void Game::run()
     std::chrono::high_resolution_clock::time_point current_time;
     std::chrono::high_resolution_clock::time_point previous_time = std::chrono::high_resolution_clock::now();
     float delta;
-    while (_is_running)
+    while (_is_running = !_render_surface->should_close())
     {
         current_time = std::chrono::high_resolution_clock::now();
-        delta = std::chrono::duration<float,std::milli>(current_time - previous_time).count() / 1000;
+        delta = std::chrono::duration<float, std::milli>(current_time - previous_time).count() / 1000;
         previous_time = current_time;
         _render_surface->viewport().clear_viewport();
         _render_surface->poll_events();
         _scene->update(delta);
-        _render_surface->swap_buffer();
-        _is_running = !_render_surface->should_close();
+        _render_surface->swap_buffer();      
     }
+    _scene.reset();
+     
 }

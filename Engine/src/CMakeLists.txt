@@ -13,20 +13,25 @@ set(SRC
 )
 
 if(WIN32 OR UNIX)
-    set(USE_GL3 1)
+    set(USE_OPENGL 1)
     set(USE_GLEW 1)
     set(USE_GLFW 1)
 endif()
 
-if (USE_GL3)
+if (USE_OPENGL) 
     find_package(OpenGL REQUIRED)
-    set(SRC ${SRC} GL3/MeshRenderer.cpp GL3/Viewport.cpp)
-    add_compile_definitions(USE_GL3)
+    set(SRC ${SRC} 
+    Backend/OpenGL/GLUtils.cpp
+    Backend/OpenGL/Rendering/Shader/Shader.cpp
+    Backend/OpenGL/Rendering/Mesh/Mesh.cpp 
+    Backend/OpenGL/Rendering/Viewport.cpp
+    )
+    set(COMP_DEFS ${COMP_DEFS} USE_OPENGL)
 endif()
 
 if(USE_GLEW)
     find_package(GLEW REQUIRED)
-    add_compile_definitions(USE_GLEW)
+    set(COMP_DEFS ${COMP_DEFS} USE_GLEW)
     if (NOT GLEW_LIBRARIES)
         find_library(GLEW_LIBRARIES glew32)
     endif()
@@ -34,18 +39,22 @@ endif()
 
 if (USE_GLFW)
     find_package(glfw3 REQUIRED)
-    set(SRC ${SRC} Platforms/WindowGLFW.cpp)
-    add_compile_definitions(USE_GLFW)
+    set(SRC ${SRC} Backend/GLFW/WindowGLFW.cpp)
+    set(COMP_DEFS ${COMP_DEFS} USE_GLFW)
     find_library(GLFW_LIBRARY glfw)
     if (NOT GLFW_LIBRARY)
         find_library(GLFW_LIBRARY glfw3)
     endif()
 endif()
 
+
 add_library(EternalEngine SHARED ${SRC})
+target_compile_definitions(EternalEngine PUBLIC ${COMP_DEFS})
+
+set(COMP_DEFS ${COMP_DEFS} PARENT_SCOPE)
 
 set(ETERNALENGINE_INCLUDE_DIR
-${CMAKE_CURRENT_SOURCE_DIR}/include
+${CMAKE_CURRENT_SOURCE_DIR}/../include
 ${OPENGL_INCLUDE_DIR} 
 ${GLFW3_INCLUDE_DIR} 
 ${GLEW_INCLUDE_DIR}

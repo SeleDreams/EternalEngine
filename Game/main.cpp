@@ -6,14 +6,13 @@
 #include <Components/TransformComponent.hpp>
 #include <Components/MeshComponent.hpp>
 #include <Components/ShaderComponent.hpp>
-#include <Rendering/Mesh/MeshRenderer.hpp>
-#include <Rendering/Mesh/Mesh.hpp>
 #include <string>
 #include <sstream>
 #include <fstream>
 #include "MovementSystem.hpp"
 
 using namespace EternalEngine;
+
 void CreateMesh(MeshComponent &mesh)
 {
     unsigned int indices[] =
@@ -30,7 +29,7 @@ void CreateMesh(MeshComponent &mesh)
         0.0f, -1.0f, 1.0f,
         1.0f, -1.0f, 0.0f,
         0.0f, 1.0f, 0.0f};
-    MeshRenderer::CreateMesh(mesh.mesh, vertices, 12, indices, 12);
+    mesh.mesh.create(vertices, 12, indices, 12);
 }
 
 std::string LoadFile(std::string path)
@@ -52,13 +51,12 @@ int main(int argc, char **argv)
     auto scene = game.main_scene();
     auto &registry = scene->entity_registry();
     auto entity = registry.create();
-    auto &transform = registry.emplace<TransformComponent>(entity);
-    transform.Transform = glm::mat4(1.0f);
+    auto &_transform = registry.emplace<TransformComponent>(entity);
+    _transform.Transform = glm::mat4(1.0f);
     auto &mesh = registry.emplace<MeshComponent>(entity);
     CreateMesh(mesh);
-    printf("Index count : %d\n",mesh.mesh.IndexCount);
     auto &shader = registry.emplace<ShaderComponent>(entity);
-    MeshRenderer::CreateShader(shader,LoadFile("assets/shaders/vert.glsl"),LoadFile("assets/shaders/frag.glsl"));
+    shader.shader.create(LoadFile("assets/shaders/vert.glsl"),LoadFile("assets/shaders/frag.glsl"));
     scene->system_manager().add_system(std::shared_ptr<MovementSystem>(new MovementSystem()));
     game.run();
 }

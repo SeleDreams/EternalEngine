@@ -13,14 +13,14 @@ void EternalEngine::MovementSystem::update(float delta)
     auto view = registry.view<TransformComponent>();
     for (auto &entity : view)
     {
-        auto &transform = view.get<TransformComponent>(entity);
-        transform.Transform = glm::mat4(1.0f);
-        transform.Transform = glm::translate(transform.Transform,glm::vec3(0.0f,0.0f,-4.0f));
+        auto &_transform = view.get<TransformComponent>(entity);
+        _transform.Transform = glm::mat4(1.0f);
+        _transform.Transform = glm::translate(_transform.Transform,glm::vec3(0.0f,0.0f,-4.0f));
         rotation += 10 * delta;
         if (rotation >= 360)
         {
             rotation -= 360;
         }
-        transform.Transform = glm::rotate(transform.Transform,rotation * toRadians,glm::vec3(1.0f,1.0f,1.0f));
+        _transform.Transform = glm::rotate(_transform.Transform,rotation * toRadians,glm::vec3(0.0f,1.0f,0.0f));
     }
 }
