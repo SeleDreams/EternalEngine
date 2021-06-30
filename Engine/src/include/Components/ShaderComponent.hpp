@@ -13,5 +13,5 @@ namespace EternalEngine
         unsigned int model_uniform = 0;
         unsigned int projection_uniform = 0;
     };
- //   REGISTER_COMPONENT(ShaderComponent);
+ REGISTER_COMPONENT(ShaderComponent);
 }

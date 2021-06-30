@@ -10,13 +10,13 @@ namespace EternalEngine
         {
             properties.clear();
             ComponentProperty mesh_property;
-            mesh_property.PropertyAccess = PROPERTY_ACCESS_WRITE;
-            mesh_property.PropertyName = "mesh";
-            mesh_property.PropertyType = PROPERTY_TYPE_NONE;
-            mesh_property.PropertyAddress = &mesh;
-            properties.insert_or_assign(mesh_property.PropertyName,mesh_property);
+            mesh_property.property_access = PROPERTY_ACCESS_WRITE;
+            mesh_property.property_name = "mesh";
+            mesh_property.property_type = PROPERTY_TYPE_NONE;
+            mesh_property.property_address = &mesh;
+            properties.insert_or_assign(mesh_property.property_name,mesh_property);
         }
         Mesh mesh;
     };
-   // REGISTER_COMPONENT(MeshComponent);
+   REGISTER_COMPONENT(MeshComponent);
 }

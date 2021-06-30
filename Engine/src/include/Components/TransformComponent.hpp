@@ -12,13 +12,13 @@ namespace EternalEngine
         {
             properties.clear();
             ComponentProperty transform;
-            transform.PropertyAccess = PROPERTY_ACCESS_WRITE;
-            transform.PropertyName = "Transform";
-            transform.PropertyType = PROPERTY_TYPE_MAT4;
-            transform.PropertyAddress = &Transform;
-            properties.insert_or_assign(transform.PropertyName,transform);
+            transform.property_access = PROPERTY_ACCESS_WRITE;
+            transform.property_name = "Transform";
+            transform.property_type = PROPERTY_TYPE_MAT4;
+            transform.property_address = &Transform;
+            properties.insert_or_assign(transform.property_name,transform);
         }
         glm::mat4 Transform = glm::mat4(1.0f);
     };
-  //  REGISTER_COMPONENT(TransformComponent);
+  REGISTER_COMPONENT(TransformComponent);
 };

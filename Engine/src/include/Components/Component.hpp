@@ -24,10 +24,10 @@ namespace EternalEngine
     };
     struct ComponentProperty
     {
-        std::string PropertyName;
-        PropertyType PropertyType;
-        PropertyAccess PropertyAccess;
-        void *PropertyAddress;
+        std::string property_name;
+        PropertyType property_type;
+        PropertyAccess property_access;
+        void *property_address;
     };
 
     struct Component
@@ -50,7 +50,7 @@ namespace EternalEngine
     };
 
 #define REGISTER_COMPONENT(name)    \
-    static const bool ____registered_component_##name = ComponentFactory::RegisterComponent(#name, []() \
+    static const bool ____registered_component_##name = ComponentFactory::singleton().RegisterComponent(#name, []() -> std::shared_ptr<name> \
     {\
         return std::shared_ptr<name>(new name());\
     })

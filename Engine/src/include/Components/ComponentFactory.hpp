@@ -10,27 +10,19 @@ namespace EternalEngine
     class ComponentFactory
     {
     public:
-        static bool RegisterComponent(std::string name, std::function<std::shared_ptr<Component>()> func)
+        static ComponentFactory &singleton()
         {
-          /*  _components.emplace(name,func);
-            bool alreadyExists = _components.count(name);
-            _components.insert_or_assign(name, func);*/
-            return true;
+            static ComponentFactory factory;
+            return factory;
         }
+        ComponentFactory();
+        ~ComponentFactory();
 
-        static std::shared_ptr<Component> InstantiateComponent(std::string component)
-        {
-            if (_components.count(component))
-            {
-                return _components[component]();
-            }
-            else
-            {
-                return std::shared_ptr<Component>(nullptr);
-            }
-        }
+        bool RegisterComponent(const std::string &name, const std::function<std::shared_ptr<Component>()> &func);
+
+        std::shared_ptr<Component> InstantiateComponent(const std::string &component);
 
     private:
-        static std::map<std::string, std::function<std::shared_ptr<Component>()>> _components;
+        std::map<std::string, std::function<std::shared_ptr<Component>()>> _components;
     };
 }
