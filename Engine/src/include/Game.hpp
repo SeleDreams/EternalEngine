@@ -1,7 +1,7 @@
 #pragma once
 #include <memory>
 #include <functional>
-#include <Scene.hpp>
+#include <SceneManagement/Scene.hpp>
 #include <Rendering/Renderer.hpp>
 #include <Rendering/Window/Window.hpp>
 

@@ -8,6 +8,7 @@ set(SRC
 "Game.cpp"
 "SceneManagement/Scene.cpp"
 "Systems/SystemManager.cpp"
+"Systems/RenderSystem.cpp"
 "Components/ComponentFactory.cpp"
 )
 

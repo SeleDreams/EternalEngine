@@ -18,7 +18,7 @@ namespace EternalEngine
             transform.PropertyAddress = &Transform;
             properties.insert_or_assign(transform.PropertyName,transform);
         }
-        glm::mat4 Transform;
+        glm::mat4 Transform = glm::mat4(1.0f);
     };
-    REGISTER_COMPONENT(TransformComponent);
+  //  REGISTER_COMPONENT(TransformComponent);
 };

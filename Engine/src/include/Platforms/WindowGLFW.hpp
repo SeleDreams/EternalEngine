@@ -17,7 +17,6 @@ namespace EternalEngine
         virtual void close() { glfwSetWindowShouldClose(_window, 1); }
         virtual void set_name(const std::string &new_name);
         virtual void poll_events();
-
         virtual void set_full_screen(bool fullscreen_state);
 
         virtual bool full_screen() const { return glfwGetWindowMonitor(_window) != nullptr; }

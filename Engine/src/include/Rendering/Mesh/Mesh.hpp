@@ -9,7 +9,7 @@ namespace EternalEngine
 {
     struct Mesh
     {
-#ifdef USE_GL3
+#if defined(USE_GL3) || defined(USE_GLEW)
         GLuint VertexArrayObject = 0;
         GLuint VertexBufferObject = 0;
         GLuint IndexBufferObject = 0;

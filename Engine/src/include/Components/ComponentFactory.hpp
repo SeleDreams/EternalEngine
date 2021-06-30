@@ -12,7 +12,9 @@ namespace EternalEngine
     public:
         static bool RegisterComponent(std::string name, std::function<std::shared_ptr<Component>()> func)
         {
-            _components.insert_or_assign(name, func);
+          /*  _components.emplace(name,func);
+            bool alreadyExists = _components.count(name);
+            _components.insert_or_assign(name, func);*/
             return true;
         }
 
