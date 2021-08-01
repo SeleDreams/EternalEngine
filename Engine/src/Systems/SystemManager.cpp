@@ -10,10 +10,10 @@ unsigned int SystemManager::add_system(std::shared_ptr<ISystem> system)
     return id;
 }
 
-void SystemManager::update_systems(float delta)
+void SystemManager::update_systems(entt::registry &registry,float delta)
 {
     for (std::shared_ptr<ISystem> system : _systems)
     {
-        system->update(delta);
+        system->update(registry,delta);
     }
 }

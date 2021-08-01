@@ -4,6 +4,7 @@
 #include <map>
 #include <functional>
 #include "ISystem.hpp"
+#include <entt/entt.hpp>
 
 namespace EternalEngine
 {
@@ -13,7 +14,7 @@ namespace EternalEngine
         SystemManager() = default;
         ~SystemManager() = default;
         unsigned int add_system(std::shared_ptr<ISystem> system);
-        void update_systems(float delta);
+        void update_systems(entt::registry &registry, float delta);
         void clear() { _systems.clear(); }
 
     private:

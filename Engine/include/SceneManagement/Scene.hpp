@@ -10,7 +10,7 @@ namespace EternalEngine
         Scene();
         ~Scene();
         void init();
-        void update(float delta);
+        void update( float delta);
         SystemManager &system_manager() { return _system_manager; }
         entt::registry &entity_registry() { return _entity_registry; }
     private:

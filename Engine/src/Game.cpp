@@ -3,6 +3,7 @@
 #include <Rendering/Viewport/Viewport.hpp>
 #include <chrono>
 #include <Systems/RenderSystem.hpp>
+#include <Systems/TransformSystem.hpp>
 
 #ifdef USE_GLFW
 #include <Backend/GLFW/WindowGLFW.hpp>
@@ -37,6 +38,7 @@ int Game::init(unsigned int width, unsigned int height, const char *name)
     }
     _scene = std::shared_ptr<Scene>(new Scene());
     _scene->system_manager().add_system(std::shared_ptr<RenderSystem>(new RenderSystem()));
+     _scene->system_manager().add_system(std::shared_ptr<TransformSystem>(new TransformSystem()));
     return _render_surface->create(width, height, name);
 }
 
@@ -56,6 +58,4 @@ void Game::run()
         _scene->update(delta);
         _render_surface->swap_buffer();      
     }
-    _scene.reset();
-     
 }

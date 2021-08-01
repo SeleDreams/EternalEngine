@@ -4,7 +4,7 @@
 #include <Components/ComponentFactory.hpp>
 namespace EternalEngine
 {
-    struct MeshComponent : Component
+    struct MeshComponent : public Component
     {
         MeshComponent()
         {
@@ -15,6 +15,10 @@ namespace EternalEngine
             mesh_property.property_type = PROPERTY_TYPE_NONE;
             mesh_property.property_address = &mesh;
             properties.insert_or_assign(mesh_property.property_name,mesh_property);
+        }
+        ~MeshComponent()
+        {
+
         }
         Mesh mesh;
     };

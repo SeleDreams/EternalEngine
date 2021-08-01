@@ -7,6 +7,6 @@ namespace EternalEngine
     class MovementSystem : public ISystem
     {
         virtual const char *name() { return "MovementSystem"; }
-        virtual void update(float delta);
+        virtual void update(entt::registry &registry,float delta);
     };
 };

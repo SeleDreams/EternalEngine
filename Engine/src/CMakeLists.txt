@@ -9,6 +9,7 @@ set(SRC
 "SceneManagement/Scene.cpp"
 "Systems/SystemManager.cpp"
 "Systems/RenderSystem.cpp"
+"Systems/TransformSystem.cpp"
 "Components/ComponentFactory.cpp"
 )
 
@@ -46,9 +47,12 @@ if (USE_GLFW)
         find_library(GLFW_LIBRARY glfw3)
     endif()
 endif()
+set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS TRUE) 
+
+add_library(EternalEngine STATIC ${SRC})
 
 
-add_library(EternalEngine SHARED ${SRC})
+add_link_options(--export-all-symbols)
 target_compile_definitions(EternalEngine PUBLIC ${COMP_DEFS})
 
 set(COMP_DEFS ${COMP_DEFS} PARENT_SCOPE)
@@ -68,7 +72,7 @@ target_compile_features(EternalEngine PUBLIC cxx_std_17)
 
 target_include_directories(EternalEngine PRIVATE ${ETERNALENGINE_INCLUDE_DIR} )
 
-target_link_libraries(${ETERNALENGINE_LIBRARIES})
+target_link_libraries(${ETERNALENGINE_LIBRARIES} EnTT::EnTT)
 
 set(ETERNALENGINE_LIBRARIES ${ETERNALENGINE_LIBRARIES} PARENT_SCOPE)
 set(ETERNALENGINE_INCLUDE_DIR ${ETERNALENGINE_INCLUDE_DIR} PARENT_SCOPE)

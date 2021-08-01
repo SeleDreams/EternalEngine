@@ -3,6 +3,8 @@
 #include <Components/MeshComponent.hpp>
 #include <Components/ShaderComponent.hpp>
 #include <Components/TransformComponent.hpp>
+#include <Components/CameraComponent.hpp>
+
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
@@ -15,7 +17,7 @@ namespace EternalEngine
         ~Viewport();
         int create_viewport(int width, int height);
         void resize_viewport(int new_width, int new_height);
-        void render(const MeshComponent &model,const ShaderComponent &shader,const TransformComponent &transform);
+        void render(const MeshComponent &model,const ShaderComponent &shader,const TransformComponent &transform, const CameraComponent &camera);
         unsigned int width() const { return _width; }
         unsigned int height() const { return _height; }
         void clear_viewport();

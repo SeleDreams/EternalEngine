@@ -3,17 +3,21 @@
 #include <Rendering/Window/RenderSurface.hpp>
 #include <Rendering/Viewport/Viewport.hpp>
 #include <Components/TransformComponent.hpp>
+#include <Components/MeshComponent.hpp>
+#include <Components/ShaderComponent.hpp>
 
-void EternalEngine::RenderSystem::update(float delta)
+//constexpr const float toRadians = M_PI / 180.0f;
+void EternalEngine::RenderSystem::update(entt::registry &registry,float delta)
 {
     auto viewport = Game::instance()->render_surface()->viewport();
-    auto &registry = Game::instance()->main_scene()->entity_registry();
     auto view = registry.view<TransformComponent,MeshComponent, ShaderComponent>();
-    for (auto &entity : view)
+    auto cam_view = registry.view<CameraComponent>();
+    for (const auto &entity : view)
     {
-        auto &transform = view.get<TransformComponent>(entity);
-        auto &mesh = view.get<MeshComponent>(entity);
-        auto &shader = view.get<ShaderComponent>(entity);
-        viewport.render(mesh, shader, transform);
+        MeshComponent &mesh = view.get<MeshComponent>(entity);
+        ShaderComponent &shader = view.get<ShaderComponent>(entity);
+        CameraComponent &cam = cam_view.get<CameraComponent>(cam_view[0]);
+        TransformComponent &trans = view.get<TransformComponent>(entity);
+        viewport.render(mesh,shader,trans,cam);
     }
 }
